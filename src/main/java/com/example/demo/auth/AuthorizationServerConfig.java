@@ -1,6 +1,7 @@
 package com.example.demo.auth;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,8 +23,9 @@ import javax.sql.DataSource;
 @AllArgsConstructor
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    private final AuthenticationManager authenticationManager;
-    private final DataSource dataSource;
+    private AuthenticationManager authenticationManager;
+    private DataSource dataSource;
+
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {

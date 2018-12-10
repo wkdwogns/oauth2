@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Base64;
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -29,8 +30,10 @@ public class Controller {
         params.put("redirect_uri","http://localhost:9000/callback");
         params.put("client_id","client");
 
+        String encoding = Base64.getEncoder().encodeToString(("client:password").getBytes());
+
         HttpHeaders header = new HttpHeaders();
-        header.add("Authorization", "Basic id password 합친거");
+        header.add("Authorization", "Basic " + encoding);
 
         ResponseEntity<String> responseEntity = t.exchange(uri, HttpMethod.POST ,new HttpEntity(params,header),String.class);
         System.out.println(responseEntity.getStatusCode());
